@@ -6,6 +6,7 @@ async function bootstrap() {
   app.enableCors({
     origin: ['https://recipe-generator-frontend-xi.vercel.app',
               'http://localhost:4200',
+              'http://localhost:4201'
             ] // Replace with your frontend URL
   });
   await app.listen(3000);

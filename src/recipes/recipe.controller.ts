@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Body, Query, Param, NotFoundException } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
-import { Recipe } from './recipe.interface';
+import { Recipe, DetailedRecipe } from './recipe.interface';
 
 @Controller('recipes')
 export class RecipeController {
@@ -17,18 +17,13 @@ export class RecipeController {
   }
 
   @Get('search')
-  async searchByIngredients(@Query('ingredients') ingredients: string): Promise<Recipe[]> {
-    const ingredientsArray = ingredients.split(',');
-    return this.recipeService.searchByIngredients(ingredientsArray);
+  async searchByIngredients(@Query('ingredient') ingredient: string): Promise<Recipe[]> {
+    return this.recipeService.searchByIngredients(ingredient);
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Recipe> {
-    const recipe = await this.recipeService.findOne(id);
-    if (!recipe) {
-      throw new NotFoundException('Recipe not found');
-    }
-    return recipe;
+  async getRecipeById(@Param('id') id: string): Promise<DetailedRecipe> {
+    return this.recipeService.getRecipeById(id);
   }
 
   @Put(':id')
