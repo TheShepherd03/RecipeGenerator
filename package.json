@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@nestjs/axios": "^0.0.1",
+    "@nestjs/axios": "^3.0.1",
     "@nestjs/common": "^11.0.9",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^11.0.9",
