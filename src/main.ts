@@ -20,7 +20,7 @@ async function bootstrap() {
 
   // CORS configuration
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200','https://recipe-generator-frontend-two.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
