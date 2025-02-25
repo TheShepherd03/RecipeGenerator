@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
@@ -20,9 +20,10 @@ async function bootstrap() {
 
   // CORS configuration
   app.enableCors({
-    origin: configService.get('cors.origin').split(','),
+    origin: 'http://localhost:4200',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   // Global pipes
@@ -35,10 +36,11 @@ async function bootstrap() {
   );
 
   // Global prefix
-  app.setGlobalPrefix(configService.get('api.prefix'));
+  app.setGlobalPrefix('api');
 
-  const port = configService.get('port');
-  await app.listen(port);
+  // Use a hardcoded port for now
+  const port = 3000;
+  await app.listen(port, '0.0.0.0');
   console.log(`Application is running on: http://localhost:${port}`);
 }
 
